@@ -1,7 +1,10 @@
 import React from 'react';
 
 const MovieList = (props) => {
+    
     const FavouriteComponent = props.favouriteComponent;
+    console.log("Props:", props);
+
     return (
         <>
             {props.movies.map((movie, index) => (

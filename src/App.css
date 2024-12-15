@@ -8,14 +8,10 @@ body {
   flex-wrap: nowrap;
 }
 
-.custom-row > * {
-  flex-shrink: 1 !important; /* Permet aux enfants de rétrécir si nécessaire */
-
-}
-
 .image-container {
   position: relative;
   transition: transform 0.2s;
+  width: auto;
 }
 
 .image-container:hover {
