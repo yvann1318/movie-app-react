@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Movie App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bienvenue dans **Movie App**, une application web pour parcourir un catalogue de films, consulter les détails et gérer vos favoris.
 
-## Available Scripts
+## Prérequis
 
-In the project directory, you can run:
+Avant de commencer, assurez-vous d’avoir :
 
-### `npm start`
+1. **Windows 10 (ou supérieur)**
+2. **Node.js** (v14 ou supérieur) et **npm** installés ; vérifiez :
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   ```bash
+   node -v
+   npm -v
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation du projet
 
-### `npm test`
+1. **Clonez** le dépôt Git et placez-vous dans le dossier :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone <URL_DU_DEPOT>
+   cd <NOM_DU_PROJET>
+   ```
 
-### `npm run build`
+2. **Configurez la connexion à MySQL** :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   * Ouvrez le fichier `backend/server.js` dans votre éditeur de code.
+   * Localisez la section suivante :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+     ```js
+     const db = mysql.createConnection({
+       host: '127.0.0.1',
+       user: 'root',
+       password: '',
+       database: 'movie_app',
+       port: 3306
+     });
+     ```
+   * **Remplacez** chaque valeur par vos propres informations :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+     ```js
+     const db = mysql.createConnection({
+       host: 'VOTRE_HOTE',          // ex. '127.0.0.1'
+       user: 'VOTRE_UTILISATEUR',   // ex. 'root'
+       password: 'VOTRE_MOT_DE_PASSE',
+       database: 'movie_app',       // gardez ce nom à moins d’en avoir créé un différent
+       port: VOTRE_PORT             // ex. 3306
+     });
+     ```
+   * Sauvegardez `server.js`.
 
-### `npm run eject`
+3. **Importez la base de données** :
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Démarrage en un clic
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Pour lancer simultanément tous les composants :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Assurez-vous d’être à la racine du projet (contenant `start-servers.bat`).
+2. Double-cliquez sur **start-servers.bat** ou exécutez :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   start-servers.bat
+   ```
+3. Trois fenêtres de terminal s’ouvriront :
 
-## Learn More
+   * **MySQL** : démarrage du service Windows MySQL
+   * **Backend** : installation des dépendances et lancement du serveur Node.js
+   * **Frontend** : installation des dépendances et lancement de la webapp React
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> **Astuce :** lisez les messages d’erreur dans la fenêtre correspondante si un service ne démarre pas.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Accès à l’application
 
-### Code Splitting
+* **Frontend (UI)** : ouvrez votre navigateur à
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  ```
+  http://localhost:3000
+  ```
+* **Backend (API)** : l’API est disponible à
 
-### Analyzing the Bundle Size
+  ```
+  http://localhost:5000
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
