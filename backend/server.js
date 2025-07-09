@@ -110,6 +110,59 @@ app.post('/utilisateur', (req, res) => {
     );
 });
 
+// 6. Associer un film favori à un utilisateur
+app.post('/favori', (req, res) => {
+    const { utilisateur_id, film_id } = req.body;
+    db.query(
+        'INSERT INTO favori (utilisateur_id, film_id) VALUES (?, ?)',
+        [utilisateur_id, film_id],
+        (err, result) => {
+            if (err) {
+                console.error('Erreur lors de l\'ajout du favori :', err);
+                res.status(500).send(err);
+            } else {
+                res.json({ message: 'Favori ajouté avec succès' });
+            }
+        }
+    );
+});
+
+// 7. Récupérer les films favoris d'un utilisateur
+app.get('/favoris/:utilisateur_id', (req, res) => {
+    const { utilisateur_id } = req.params;
+    db.query(
+        `SELECT f.* FROM filmfavoris f
+         JOIN favori fa ON f.id = fa.film_id
+         WHERE fa.utilisateur_id = ?`,
+        [utilisateur_id],
+        (err, results) => {
+            if (err) {
+                console.error('Erreur lors de la récupération des favoris :', err);
+                res.status(500).send(err);
+            } else {
+                res.json(results);
+            }
+        }
+    );
+});
+
+// 8. Supprimer un favori pour un utilisateur
+app.delete('/favori', (req, res) => {
+    const { utilisateur_id, film_id } = req.body;
+    db.query(
+        'DELETE FROM favori WHERE utilisateur_id = ? AND film_id = ?',
+        [utilisateur_id, film_id],
+        (err, result) => {
+            if (err) {
+                console.error('Erreur lors de la suppression du favori :', err);
+                res.status(500).send(err);
+            } else {
+                res.json({ message: 'Favori supprimé avec succès' });
+            }
+        }
+    );
+});
+
 // Lancement du serveur
 app.listen(5000, () => {
     console.log('Serveur démarré sur le port 5000');

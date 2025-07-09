@@ -20,6 +20,8 @@ const LoginPage = () => {
         if (response.status === 200) {
             const data = await response.json();
             console.log('Authentification réussie', data);
+            // Stocker l'id utilisateur dans le localStorage
+            localStorage.setItem('userId', data.user.id);
             // Redirige l'utilisateur vers la page des films
             navigate('/movies');
         } else if (response.status === 401) {
